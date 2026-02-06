@@ -4,3 +4,4 @@ This repository contains the source code and configuration files for the CI/CD p
 ## Table of Contents
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
+- [CI/CD Pipelines](#cicd-pipelines)
