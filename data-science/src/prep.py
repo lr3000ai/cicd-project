@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 """
-Prepares raw data and provides training and test datasets.
+Prepares raw data and provides training and test datasets for used cars prices.
 """
 
 import argparse
