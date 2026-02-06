@@ -61,7 +61,7 @@ def main(args):
     print('Mean Squared Error of RandomForest Regressor on test set: {:.2f}'.format(mse))
     mlflow.log_metric("MSE", float(mse))  # Log the MSE
 
-    mlflow.sklearn.log_model(sk_model=model, path=args.model_output)  # Save the model
+    mlflow.sklearn.log_model(sk_model=model, artifact_path=args.model_output)  # Save the model
 
 if __name__ == "__main__":
     
