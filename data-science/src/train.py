@@ -20,6 +20,7 @@ def parse_args():
     parser.add_argument("--train_data", type=str, help="Path to train dataset")
     parser.add_argument("--test_data", type=str, help="Path to test dataset")
     parser.add_argument("--model_output", type=str, help="Path of output model")
+    parser.add_argument("--n_estimators", type=int, default=50, help="Number of trees for the RandomForestRegressor")
     parser.add_argument('--criterion', type=str, default='gini',
                         help='The function to measure the quality of a split')
     parser.add_argument('--max_depth', type=int, default=None,
