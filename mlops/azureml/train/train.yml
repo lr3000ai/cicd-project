@@ -13,6 +13,10 @@ inputs:
   max_depth:
     type: integer  # Specify the type for max_depth
     default: 5  # Provide the default value for max_depth
+  criterion:
+    type: string
+    default: squared_error
+
 outputs:
   model_output:
     type: mlflow_model  # Specify the type for model_output
@@ -23,5 +27,6 @@ command: >-
   --test_data ${{inputs.test_data}}
   --n_estimators ${{inputs.n_estimators}}
   --max_depth ${{inputs.max_depth}}
+  --criterion ${{inputs.criterion}}
   --model_output ${{outputs.model_output}}
 environment: azureml:used-cars-train-env@latest

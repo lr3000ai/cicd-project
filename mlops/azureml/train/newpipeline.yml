@@ -58,6 +58,9 @@ jobs:
       max_depth:
         type: choice  # Specify the type for max_depth
         values: [1,3,5,10]  # Provide the values for max_depth
+      criterion:
+        type: choice
+        values: ["squared_error"]
     objective:
       goal: minimize
       primary_metric: MSE
