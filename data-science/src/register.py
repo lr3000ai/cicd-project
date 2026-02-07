@@ -62,13 +62,21 @@ def main(args):
     print("Writing JSON")
     model_info = {"id": f"{args.model_name}:{model_version}"}
 
-    # Ensure the output directory exists (Azure ML mounts an empty dir)
+    # Azure ML mounts args.model_info_output_path as an existing directory
     output_dir = args.model_info_output_path
-    os.makedirs(output_dir, exist_ok=True)
 
+    # If you want to write directly into that folder:
     output_path = os.path.join(output_dir, "model_info.json")
+
+    # Or, if you prefer a subfolder, create that instead:
+    # sub_dir = os.path.join(output_dir, "info")
+    # os.makedirs(sub_dir, exist_ok=True)
+    # output_path = os.path.join(sub_dir, "model_info.json")
+
+    print(f"Writing model info to: {output_path}")
     with open(output_path, "w") as of:
         json.dump(model_info, of)
+
 
 
 if __name__ == "__main__":
