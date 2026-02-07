@@ -24,7 +24,7 @@ def parse_args():
     parser.add_argument("--train_data", type=str, help="Path to train dataset")
     parser.add_argument("--test_data", type=str, help="Path to test dataset")
     # This should map to the component/pipeline output 'model_output'
-    parser.add_argument("--model_output", type=str, help="Path of output model")
+    parser.add_argument("--model_output", type=str, help="Path of output MLflow model")
 
     parser.add_argument(
         "--n_estimators",
@@ -89,14 +89,14 @@ def main(args):
     print("Mean Squared Error of RandomForest Regressor on test set: {:.2f}".format(mse))
     mlflow.log_metric("mse", float(mse))
 
-    # Ensure output dir exists and save a pickle for Azure ML to pick up
-    model_output_dir = Path(args.model_output)
-    model_output_dir.mkdir(parents=True, exist_ok=True)
-    joblib.dump(model, model_output_dir / "model.pkl")
+    # 1) Save an MLflow model to a local directory "model"
+    local_mlflow_model_dir = "model"
+    mlflow.sklearn.save_model(sk_model=model, path=local_mlflow_model_dir)  # creates MLmodel, conda.yaml, etc.
 
-    # Also log the model to MLflow under the same artifact path name
-    # artifact_path is a *name* inside the MLflow run, not a full filesystem path
-    mlflow.sklearn.log_model(sk_model=model, artifact_path="model")
+    # 2) Copy that MLflow model directory into the Azure ML output mount
+    output_dir = args.model_output
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+    copy_tree(local_mlflow_model_dir, output_dir)  # now model_output is a valid MLflow model dir.
 
 
 if __name__ == "__main__":
