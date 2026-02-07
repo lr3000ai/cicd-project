@@ -36,7 +36,7 @@ def parse_args():
     parser.add_argument(
         "--criterion",
         type=str,
-        default="squared_error",  # use a valid regressor criterion
+        default="mse",  # use a valid regressor criterion
         help="The function to measure the quality of a split",
     )
 
@@ -87,7 +87,7 @@ def main(args):
     yhat_test = model.predict(X_test)
     mse = mean_squared_error(y_test, yhat_test)
     print("Mean Squared Error of RandomForest Regressor on test set: {:.2f}".format(mse))
-    mlflow.log_metric("MSE", float(mse))
+    mlflow.log_metric("mse", float(mse))
 
     # Ensure output dir exists and save a pickle for Azure ML to pick up
     model_output_dir = Path(args.model_output)

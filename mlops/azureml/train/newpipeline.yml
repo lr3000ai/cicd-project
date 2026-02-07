@@ -60,10 +60,10 @@ jobs:
         values: [1,3,5,10]  # Provide the values for max_depth
       criterion:
         type: choice
-        values: ["squared_error"]
+        values: ["mse"]
     objective:
       goal: minimize
-      primary_metric: MSE
+      primary_metric: mse
     limits:
       max_total_trials: 20
       max_concurrent_trials: 10

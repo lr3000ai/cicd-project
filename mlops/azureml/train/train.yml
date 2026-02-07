@@ -15,7 +15,7 @@ inputs:
     default: 5  # Provide the default value for max_depth
   criterion:
     type: string
-    default: squared_error
+    default: mse
 
 outputs:
   model_output:
